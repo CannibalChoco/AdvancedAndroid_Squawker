@@ -35,10 +35,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import timber.log.Timber;
+
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int LOADER_ID_MESSAGES = 0;
 
     RecyclerView mRecyclerView;
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Timber.plant(new Timber.DebugTree());
         mRecyclerView = (RecyclerView) findViewById(R.id.squawks_recycler_view);
 
         // Use this setting to improve performance if you know that changes
@@ -92,17 +96,16 @@ public class MainActivity extends AppCompatActivity implements
         // Checks if the extras exist and if the key "test" from our FCM message is in the intent
         if (extras != null && extras.containsKey("test")) {
             // If the key is there, print out the value of "test"
-            Log.d(LOG_TAG, "Contains: " + extras.getString("test"));
+            Timber.d("Contains: " + extras.getString("test"));
         }
 
-        // TODO (1) Make a new package for your FCM service classes called "fcm"
-            // TODO (2) Create a new Service class that extends FirebaseInstanceIdService.
+        // DONE (1) Make a new package for your FCM service classes called "fcm"
+            // DONE (2) Create a new Service class that extends FirebaseInstanceIdService.
             // You'll need to implement the onTokenRefresh method. Simply have it print out
             // the new token.
-        // TODO (3) Here, in MainActivity, get a token using FirebaseInstanceId.getInstance().getToken()
-        // TODO (4) Get the message from that token and print it in a log statement
-
-
+        // DONE (3) Here, in MainActivity, get a token using FirebaseInstanceId.getInstance().getToken()
+        // DONE (4) Get the message from that token and print it in a log statement
+        Timber.d("Token: " + FirebaseInstanceId.getInstance().getToken());
     }
 
     @Override
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements
         // This method generates a selection off of only the current followers
         String selection = SquawkContract.createSelectionForCurrentFollowers(
                 PreferenceManager.getDefaultSharedPreferences(this));
-        Log.d(LOG_TAG, "Selection is " + selection);
+        Timber.d("Selection is " + selection);
         return new CursorLoader(this, SquawkProvider.SquawkMessages.CONTENT_URI,
                 MESSAGES_PROJECTION, selection, null, SquawkContract.COLUMN_DATE + " DESC");
     }

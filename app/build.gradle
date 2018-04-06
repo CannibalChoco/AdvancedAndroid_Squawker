@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 27
@@ -40,6 +39,9 @@ dependencies {
 
     // Firebase dependency
     implementation 'com.google.firebase:firebase-messaging:12.0.1'
+
+    // timber
+    implementation 'com.jakewharton.timber:timber:4.5.0'
 }
 // Apply the Google Services plugin. Make sure to add the google-services.json file in the app
 // folder. You download it from the Firebase console

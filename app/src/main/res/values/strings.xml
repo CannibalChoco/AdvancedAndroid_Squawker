@@ -18,6 +18,9 @@
     <string name="notification_message">"New squawk from %1$s"</string>
     <string name="toast_refresh">Refreshing Data</string>
     <string name="message_token_format" translatable="false">InstanceID Token: %s</string>
+
+    <!-- Notification channel name -->
+    <string name="main_notification_channel_name">new_message</string>
     
     <!-- Strings for Following Screen -->
     <string name="follow_key_switch_asser">key_asser</string>
